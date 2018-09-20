@@ -2,7 +2,6 @@ import json
 import os
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import json
 
 class provider:
     _id = ""

@@ -2,9 +2,14 @@
 from flask import Flask, request
 from provider import provider
 from settings import Config
+from flask_socketio import SocketIO, join_room, leave_room, emit, disconnect
+import json
+import socketEvents
 
 app = Flask(__name__)
 app.config.from_object(Config)
+socketio = SocketIO(app)
+socketEvents.init(socketio)
 
 
 #Create new Provider
@@ -40,6 +45,6 @@ def DeleteProvider():
 
 
 
-
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app)
+    # app.run()
