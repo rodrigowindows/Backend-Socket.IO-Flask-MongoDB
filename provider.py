@@ -51,8 +51,8 @@ class provider:
     def postProvider(self):
         self.connectDB()
         data = {}
-        data['lat'] = self.lat
-        data['lon'] = self.lon
+        data['lat'] = float(self.lat)
+        data['lon'] = float(self.lon)
         data['name'] = self.name
         self.mydb.providers.update_one({'_id':ObjectId(self._id)},{'$set': data})
         return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
@@ -60,8 +60,8 @@ class provider:
     def createNewProvider(self):
         self.connectDB()
         data = {}
-        data['lat'] = self.lat
-        data['lon'] = self.lon
+        data['lat'] = float(self.lat)
+        data['lon'] = float(self.lon)
         data['name'] = self.name
         post_id = self.mydb.providers.insert_one(data).inserted_id
         return json.dumps({'success':True,'id':str(post_id)}), 200, {'ContentType':'application/json'} 

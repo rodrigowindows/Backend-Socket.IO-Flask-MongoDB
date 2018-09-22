@@ -12,7 +12,7 @@ socketio = SocketIO(app)
 socketEvents.init(socketio)
 
 
-#Create new Provider
+#Get Providers
 @app.route('/providers', methods=['GET'])
 def GetProviders():
     if request.method == 'GET':
@@ -43,6 +43,14 @@ def DeleteProvider():
         p =  provider()
         return(p.DeleteProvider(request.args.get('_id')))
 
+
+#needs changse access control later
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
 
 
 if __name__ == '__main__':
